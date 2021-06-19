@@ -1,16 +1,16 @@
 <template>
     <div>
         <div>
-            <label >Username : </label>
+            <p>Username : </p>
             <input type="text" v-model="username"/>
         </div>
         <div>
-            <label >Password : </label>
+            <p>Password : </p>
             <input type="password" v-model="password">
         </div>
         
-        <button @click="simpan">Save</button>
-        <button @click="hapus"> Delete</button>
+        <button @click="save">Save</button>
+        <button @click="deleted"> Delete</button>
     </div>
 </template>
 
@@ -23,16 +23,16 @@ export default {
         }
     },
     created:function(){
-        this.username = localStorage.getItem('usr')
+        this.username = localStorage.getItem('user')
         this.password = localStorage.getItem('pwd')
     },
     methods:{
-        simpan : function (){
-            localStorage.setItem('usr',this.username)
+        save : function (){
+            localStorage.setItem('user',this.username)
             localStorage.setItem('pwd',this.password)
         },
-        hapus : function (){
-            localStorage.removeItem('usr',this.username)
+        deleted : function (){
+            localStorage.removeItem('user',this.username)
             localStorage.removeItem('pwd',this.password)
             this.username = ''
             this.password = ''

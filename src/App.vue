@@ -22,11 +22,8 @@
             {{ todo.description }}
           </p>
           <div class="column is-narrow">
-            <span class="icon has-text-light" @click="isSelected(todo) ?  unselect() : select(todo)">
-              <i class="material-icons">{{isSelected(todo) ? 'close': 'edit'}}</i>
-            </span>
-            <span class="icon has-text-light" @click="isSelected(todo) ? updateTodo(todo, i) : removeTodo(todo, i)">
-              <i class="material-icons">{{isSelected(todo) ? 'save': 'delete'}}</i>
+            <span class="icon has-text-light" @click="removeTodo(todo, i)">
+              <i class="material-icons">{{'delete'}}</i>
             </span>
           </div>
       </div>
@@ -46,13 +43,12 @@ export default {
       selected: {}
     }
   },
-  //Render terlebih dahulu semua elemen DOM
+
   async mounted() {
     const response = await axios.get('http://localhost:3000/todo')
     this.todos = response.data
   },
-
-  //Cara Method untuk melihat perubahan DB
+  
   methods: {
     async addTodo() {
       const response = await axios.post('http://localhost:3000/todo', {
@@ -77,13 +73,6 @@ export default {
       this.selected = {};
       this.editedDescription = "";
     },
-    async updateTodo(todo, i) {
-      const response = await axios.put("http://localhost:3000/todo/" + todo._id, {
-        description: this.editedDescription
-      });
-      this.todos[i] = response.data;
-      this.unselect
-    }
   }
 }
 </script>
